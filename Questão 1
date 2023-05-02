@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <locale.h>
+
+int main() {
+  setlocale(LC_ALL,"");
+    int n;
+    printf("Digite o número de voltas: ");
+    scanf("%i", &n);
+    
+    float t[n];
+    for (int i = 0; i < n; i++) {
+        printf("Digite a duração da volta %i: ", i+1);
+        scanf("%f", &t[i]);
+    }
+    
+    float mT = t[0];
+    int posicao = 1;
+    float sT = t[0];
+    
+    for (int i = 1; i < n; i++) {
+        if (t[i] < mT) {
+            mT = t[i];
+            posicao = i+1;
+        }
+        sT += t[i];
+    }
+    
+    float media = sT / n;
+    
+    printf("Melhor tempo: %.2f segundos\n", mT);
+    printf("Na volta de npumero %i\n", posicao);
+    printf("O tempo médio é %.2f segundos\n", media);
+    
+    return 0;
+}
