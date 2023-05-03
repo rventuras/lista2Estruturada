@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <locale.h>
+
+float vQuantidade() {
+    float quantidade;
+    do {
+        printf("Digite a quantidade de peças fabricadas: ");
+        scanf("%f", &quantidade);
+        if (quantidade <= 0) {
+            printf("Valor inválido!\n");
+        }
+    } while (quantidade <= 0);
+    return quantidade;
+}
+
+float xSalario(float quantidade) {
+    float salario = 600.0;
+    if (quantidade > 50) {
+        salario += 0.5 * (quantidade - 50);
+        if (quantidade > 80) {
+            salario += 0.75 * (quantidade - 80);
+        }
+    }
+    return salario;
+}
+
+void salarioFinal(float salario) {
+    printf("Salário total: R$ %.2f\n\n", salario);
+}
+
+int main() {
+    while (1) {
+        float quantidade = vQuantidade();
+        float salario = xSalario(quantidade);
+        salarioFinal(salario);
+        
+        char continuar;
+        printf("Deseja continuar? (s/n) ");
+        scanf(" %c", &continuar);
+        if (continuar == 'n' || continuar == 'N') {
+            break;
+        }
+    }
+    
+    return 0;
+}
