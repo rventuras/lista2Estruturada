@@ -29,6 +29,7 @@ void salarioFinal(float salario) {
 }
 
 int main() {
+    setlocale(LC_ALL,"");
     while (1) {
         float quantidade = vQuantidade();
         float salario = xSalario(quantidade);
