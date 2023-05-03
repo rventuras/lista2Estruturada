@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <locale.h>
+
+char genero() {
+    char sexo;
+    do {
+        printf("Informe o sexo (M/F): ");
+        scanf(" %c", &sexo);
+    } while (sexo != 'M' && sexo != 'm' && sexo != 'F' && sexo != 'f');
+    return sexo;
+}
+
+
+float valorSalario() {
+    float salario;
+    do {
+        printf("Informe o salário: ");
+        scanf("%f", &salario);
+    } while (salario <= 1);
+    return salario;
+}
+
+
+void classificaValor(float salario, char *classificacao) {
+    if (salario > 1400) {
+        *classificacao = 'A';
+    } else if (salario < 1400) {
+        *classificacao = 'B'; 
+    } else {
+        *classificacao = 'C'; 
+    }
+}
+
+
+void mostraClassificacao(char sexo, float salario, char classificacao) {
+    printf("\nSalário: R$ %.2f\n", salario);
+    printf("Classificação: ");
+    switch (classificacao) {
+        case 'A':
+            printf("Acima do salário mínimo\n");
+            break;
+        case 'B':
+            printf("Abaixo do salário mínimo\n");
+            break;
+        case 'C':
+            printf("Igual ao salário mínimo\n");
+            break;
+    }
+    printf("Sexo: ");
+    if (sexo == 'M' || sexo == 'm') {
+        printf("Masculino\n");
+    } else {
+        printf("Feminino\n");
+    }
+}
+
+int main() {
+  setlocale(LC_ALL,"");
+    int numEmpregados, abaixoSalarioMinimo = 0, acimaSalarioMinimo = 0;
+    printf("Informe o número de empregados: ");
+    scanf("%d", &numEmpregados);
+    for (int i = 1; i <= numEmpregados; i++) {
+        printf("\nAssalariado %d:\n", i);
+        char sexo = genero();
+        float salario = valorSalario();
+        char classificacao;
+        classificaValor(salario, &classificacao);
+        mostraClassificacao(sexo, salario, classificacao);
+        if (classificacao == 'A') {
+            acimaSalarioMinimo++;
+        } else if (classificacao == 'B') {
+            abaixoSalarioMinimo++;
+        }
+    }
+    printf("\nQuantidade de empregados abaixo do salário mínimo: %d\n", abaixoSalarioMinimo);
+    printf("Quantidade de empregados acima do salário mínimo: %d\n", acimaSalarioMinimo);
+    return 0;
+}
